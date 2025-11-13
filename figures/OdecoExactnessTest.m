@@ -52,7 +52,7 @@ clebschGordan(:,:,15)=[0,0,0,0,0,0;0,(-1/2).*((5/7).*pi.^(-1)).^(1/2),0,0,0,0;0,
 %% Generate random positive polynomials
 
 randM = randn(6, 6, 1, n);
-randPSD = multiprod(multitransp(randM), randM);
+randPSD = multiprod_legacy(multitransp(randM), randM);
 q0 = squeeze(sum(sum(randPSD .* clebschGordan)));
 q0 = q0 ./ vecnorm(q0, 2, 1);
 

@@ -3,7 +3,7 @@ function [q, q0, info] = OdecoManopt(meshData, q0, saveIterates, gpuflag)
 if nargin < 3
     saveIterates = false;
 end
-
+gpuflag =false;
 if nargin < 4
     gpuflag = false;
 end

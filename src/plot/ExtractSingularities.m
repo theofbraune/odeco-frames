@@ -4,8 +4,8 @@ function [singTet, singTri, singTriType, singPoints, singEdges] ...
 persistent octa octaFlat eyeIdx
 if isempty(octa)
     octa = cat(3, eye(3), axang2rotm([eye(3) repmat(pi/2, 3, 1)]));
-    octa = reshape(multiprod(octa, permute(octa, [1 2 4 3])), 3, 3, []);
-    octa = reshape(multiprod(octa, permute(octa, [1 2 4 3])), 9, []);
+    octa = reshape(multiprod_legacy(octa, permute(octa, [1 2 4 3])), 3, 3, []);
+    octa = reshape(multiprod_legacy(octa, permute(octa, [1 2 4 3])), 9, []);
     octa = uniquetol(octa', 'ByRows', true);
     eyeIdx = find(ismembertol(octa, reshape(eye(3), 1, 9), 'ByRows', true));
     octa = permute(reshape(octa', 3, 3, []), [1 2 4 3]);

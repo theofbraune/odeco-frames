@@ -2,10 +2,14 @@
 #include "tbb/enumerable_thread_specific.h"
 #include "tbb/partitioner.h"
 #include <vector>
+#include <string>
 #include "mex.h"
 #include "matrix.h"
 #include "blas.h"
 #include "lapacke.h"
+
+
+
 
 static char const * const errInputId = "batchop_cpu:InvalidInput";
 

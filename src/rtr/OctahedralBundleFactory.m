@@ -61,7 +61,8 @@ function v = tangent2ambient(q, s, Lxyzq)
     if nargin < 3
         Lxyzq = M.tangentbasis(q);
     end
-    v = multiprod(s, Lxyzq, 2, 3);
+    %v = multiprod(s, Lxyzq, 2, 3);
+    v = multiprod_legacy(s, Lxyzq, 2, 3);
 end
 
 M.egrad2rgrad = M.proj;
@@ -89,7 +90,8 @@ function rhess = ehess2rhess(q, egrad, ehess, s, sAmbient, rgrad, LxyzTegrad, Lx
     rhess(intIdx, :) = rhess(intIdx, :) + intTerm(intIdx, :);
     
     % Boundary
-    bdryBasis = multiprod(bdryNormals, LxyzTegrad(:, bdryIdx, :), 2, 3);
+    % bdryBasis = multiprod(bdryNormals, LxyzTegrad(:, bdryIdx, :), 2, 3);
+    bdryBasis = multiprod_legacy(bdryNormals, LxyzTegrad(:, bdryIdx, :), 2, 3);
     bdryTerm = squeeze(dot(sAmbient(:, bdryIdx), bdryBasis, 1))' .* bdryNormals;
     rhess(bdryIdx, :) = rhess(bdryIdx, :) + bdryTerm;
 end

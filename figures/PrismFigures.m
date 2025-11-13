@@ -10,6 +10,7 @@ samplesStacked = [samples + [0 0 1]; samples; samples + [0 0 -1]];
 samplesLine = [zeros(14, 1) linspace(0, sqrt(3), 14)' zeros(14, 1)];
 
 figure; PlotInterpolatedFrames(qPrismOdecoMBORTR, prism.tetra, samplesStacked, 'ColorField', @(q) vecnorm(q(2:6, :), 2, 1).');
+
 view([0 -1 0.5]);
 axis image vis3d off;
 caxis('manual');

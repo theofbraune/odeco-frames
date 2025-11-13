@@ -65,9 +65,10 @@ for k = 2:1000
         bdryIdx, bdryBasis, qFixed, warmstart);
     
     % Project
-    qDiffBdry = multiprod(multitransp(bdryBasis), qDiffused(:, bdryIdx) - bdryFixed, [1 2], 1);
+    % qDiffBdry = multiprod(multitransp(bdryBasis), qDiffused(:, bdryIdx) - bdryFixed, [1 2], 1);
+    qDiffBdry = multiprod_legacy(multitransp(bdryBasis), qDiffused(:, bdryIdx) - bdryFixed, [1 2], 1);
     qProjBdry = fiber.projAligned(qDiffBdry);
-    qProj(:, bdryIdx) = multiprod(bdryBasis, qProjBdry, [1 2], 1) + bdryFixed;
+    qProj(:, bdryIdx) = multiprod_legacy(bdryBasis, qProjBdry, [1 2], 1) + bdryFixed;
     qProj(:, intIdx) = fiber.proj(qDiffused(:, intIdx));
     
     % Compute Statistics

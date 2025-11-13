@@ -39,7 +39,8 @@ if p.Results.PlotCubes
     if ~isempty(p.Results.ColorField)
         colors = repelem(p.Results.ColorField, 6);
     elseif ~isempty(p.Results.NormalColorRot)
-        normals = multiprod(frames, permute(cubeNormals, [2 3 4 1]));
+        %normals = multiprod(frames, permute(cubeNormals, [2 3 4 1]));
+        normals = multiprod_legacy(frames, permute(cubeNormals, [2 3 4 1]));
         normals = reshape(permute(normals, [4 3 1 2]), [], 3);
         normals = normals ./ vecnorm(normals, 2, 2);
         rot = p.Results.NormalColorRot;

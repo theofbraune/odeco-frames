@@ -14,7 +14,9 @@ axes = randn(n, 3, dataType);
 axes = axes ./ sqrt(dot(axes, axes, 2));
 axes(alignIdx, :) = alignAxes;
 D = OctaAlignMat(axes);
-q = multiprod(multitransp(D), q, [1 2], 1);
+q = multiprod_legacy(multitransp(D), q, [1 2], 1);
+% q = multiprod(multitransp(D), q);
+
 
 end
 

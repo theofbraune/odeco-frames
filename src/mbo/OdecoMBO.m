@@ -51,7 +51,8 @@ odeco.bdryBasis = @odecoBdryBasis;
 function [bdryFixed, bdryBasis] = odecoBdryBasis(bdryNormals)
     BdryRotStacked = OdecoAlignMat(bdryNormals);
     bdryBasis = multiprod(multitransp(BdryRotStacked), zAlignedBasis);
-    bdryFixed = multiprod(multitransp(BdryRotStacked), zAlignedFixed, [1 2], 1);
+    bdryFixed = multiprod_legacy(multitransp(BdryRotStacked), zAlignedFixed, [1 2], 1);
+    % bdryFixed = multiprod(multitransp(BdryRotStacked), zAlignedFixed);
 end
 
 %% Initial Value

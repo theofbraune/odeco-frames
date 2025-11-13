@@ -19,19 +19,20 @@ bdryIntIdx = [bdryIdx; intIdx];
 
 function Aq = mulA(q)
     qBdry = reshape(q(1:d*nb), [d nb]);
-    qBdry = multiprod(BdryBasis, qBdry, [1 2], 1);
+    % qBdry = multiprod(BdryBasis, qBdry, [1 2], 1);
+    qBdry = multiprod_legacy(BdryBasis, qBdry, [1 2], 1);
     qFull(:, bdryIntIdx) = [qBdry, reshape(q(d*nb+1:end), [D ni])];
     AqFull = (A * qFull.').';
-    AqBdry = multiprod(multitransp(BdryBasis), AqFull(:, bdryIdx), [1 2], 1);
+    AqBdry = multiprod_legacy(multitransp(BdryBasis), AqFull(:, bdryIdx), [1 2], 1);
     AqBdry = AqBdry(:);
     Aq = [AqBdry; reshape(AqFull(:, intIdx), [D*ni 1])];
 end
 
 rhs = rhs - (A * qFixed.').';
-rhsBdry = multiprod(multitransp(BdryBasis), rhs(:, bdryIdx), [1 2], 1);
+rhsBdry = multiprod_legacy(multitransp(BdryBasis), rhs(:, bdryIdx), [1 2], 1);
 rhs = [rhsBdry(:); reshape(rhs(:, intIdx), [D*ni, 1])];
 [soln, ~, ~, iter] = pcg(@mulA, rhs, [], 1000, [], [], warmstart);
-q(:, bdryIdx) = multiprod(BdryBasis, reshape(soln(1:d*nb), [d nb]), [1 2], 1);
+q(:, bdryIdx) = multiprod_legacy(BdryBasis, reshape(soln(1:d*nb), [d nb]), [1 2], 1);
 q(:, intIdx) = reshape(soln(d*nb+1:end), [D ni]);
 q = q + qFixed;
 

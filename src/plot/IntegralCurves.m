@@ -71,7 +71,8 @@ for k = 2:nSteps
         curveColor(insideIdx, k) = dot(baryCoords, reshape(colorField(neighVertIdx), size(neighVertIdx)), 2);
     end
     
-    [~, neighVertMatch] = max(multiprod(neighVertFrames, curveVel(insideIdx, :)', [1 2], 1));
+    % [~, neighVertMatch] = max(multiprod(neighVertFrames, curveVel(insideIdx, :)', [1 2], 1));
+    [~, neighVertMatch] = max(multiprod_legacy(neighVertFrames, curveVel(insideIdx, :)', [1 2], 1));
     neighVertMatch = repmat(permute(neighVertMatch, [2 3 1]), [1 1 3]);
     neighVertIdx = repmat(neighVertIdx, [1 1 3]);
     xyz = repmat(permute((1:3), [1 3 2]), [nCurves, 4, 1]);
@@ -79,7 +80,8 @@ for k = 2:nSteps
     idx = sub2ind(size(frames), neighVertMatch, xyz, neighVertIdx);
     neighVertVel = frames(idx);
     
-    curveVel(insideIdx, :) = squeeze(multiprod(baryCoords, neighVertVel, 2, [2 3]));
+    % curveVel(insideIdx, :) = squeeze(multiprod(baryCoords, neighVertVel, 2, [2 3]));
+    curveVel(insideIdx, :) = squeeze(multiprod_legacy(baryCoords, neighVertVel, 2, [2 3]));
     curveVel(insideIdx, :) = curveVel(insideIdx, :) ./ vecnorm(curveVel(insideIdx, :), 2, 2);
     
     curveHeads(k, insideIdx, :) = curveHeads(k - 1, insideIdx, :) + dt * permute(curveVel(insideIdx, :), [3 1 2]);

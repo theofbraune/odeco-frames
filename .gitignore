@@ -7,5 +7,6 @@ formulae/*
 .DS_Store
 *.o
 *.mexmaci64
+*.mexmaca64
 *.mexa64
 .vscode

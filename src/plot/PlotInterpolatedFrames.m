@@ -17,7 +17,8 @@ tetIdx = tetIdx(insideIdx);
 baryCoords = baryCoords(insideIdx, :);
 
 qVerts = reshape(q(:, tetra(tetIdx, :)'), d, 4, []);
-qSamples = squeeze(multiprod(permute(baryCoords, [3 2 1]), qVerts, 2, 2));
+% qSamples = squeeze(multiprod(permute(baryCoords, [3 2 1]), qVerts, 2, 2));
+qSamples = squeeze(multiprod_legacy(permute(baryCoords, [3 2 1]), qVerts, 2, 2));
 
 if d == 9
     projector = OctaMBO;
